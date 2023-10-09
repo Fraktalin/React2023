@@ -1,0 +1,6 @@
+[
+  { "title": "washing dishes", "id": 0, "done": true },
+  { "title": "wash", "id": 1, "done": true },
+  { "title": "cleaning", "id": 2, "done": false },
+  { "title": "cooking", "id": 3, "done": true }
+]
