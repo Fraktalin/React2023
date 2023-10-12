@@ -1,24 +1,36 @@
-// import { memo } from "react";
-import { useState } from "react";
-import { getTodos } from "../../utils/todos";
+import { useEffect, useState } from 'react';
+import { getTodos, getStaticTodos } from '../../utils/todos';
 
-function List(items) {
-  // let arr = [
-  //   { title: "washing dishes", id: 0, done: true },
-  //   { title: "wash", id: 1, done: true },
-  //   { title: "cleaning", id: 2, done: false },
-  //   { title: "cooking", id: 3, done: true },
-  // ];
+// Option 1 - we can import todos from "../../db.json";
+const staticTodos = getStaticTodos();
 
+function StaticList() {
   return (
     <ul>
-      {items.map((item) => (
+      {staticTodos.map((item) => (
         <li key={item.id}>{item.done ? <s>{item.title}</s> : item.title}</li>
       ))}
     </ul>
   );
 }
 
-getTodos().then(List);
+function DynamicList() {
+  const [todos, setTodos] = useState([]);
 
-export default List;
+  // Option 2 - we can use json-server and fetch todos from the backend
+  // Look at package.json scripts - we have run `yarn server` in another terminal
+  // It will be started in http://localhost:5000
+  useEffect(() => {
+    getTodos().then(setTodos).catch(console.error)
+  }, [])
+
+  return (
+    <ul>
+      {todos.map((item) => (
+        <li key={item.id}>{item.done ? <s>{item.title}</s> : item.title}</li>
+      ))}
+    </ul>
+  );
+}
+
+export default DynamicList;

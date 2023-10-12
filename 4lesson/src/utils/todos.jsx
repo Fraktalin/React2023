@@ -1,21 +1,28 @@
+import { todos } from '../../db.json';
+
 export async function getTodos() {
-  return await fetch("../../db.json")
+  return await fetch('http://localhost:5000/todos')
     .then((response) => response.json())
     .then((data) => {
-      console.log(data);
+      console.log('Getting dynamic todos from the backend', data);
       return data;
     });
 }
 
+export function getStaticTodos() {
+  console.log('Getting static todos.', todos);
+  return todos
+}
+
 export function filterTodos(todos, tab) {
-  console.log("Filtering " + todos.length + ' todos for "' + tab + '" tab.');
+  console.log('Filtering ' + todos.length + ' todos for "' + tab + '" tab.');
 
   return todos.filter((todo) => {
-    if (tab === "all") {
+    if (tab === 'all') {
       return true;
-    } else if (tab === "active") {
+    } else if (tab === 'active') {
       return !todo.completed;
-    } else if (tab === "completed") {
+    } else if (tab === 'completed') {
       return todo.completed;
     }
   });
