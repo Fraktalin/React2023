@@ -64,6 +64,14 @@ button:focus-visible {
   background: #f9f9f9;
   color: black;
 }
+.dark li button {
+  background: #f9f9f9;
+  color: black;
+}
+.light li button {
+  background: #1a1a1a;
+  color: white;
+}
 
 #root {
   width: 100%;
